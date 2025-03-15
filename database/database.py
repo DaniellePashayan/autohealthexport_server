@@ -23,7 +23,7 @@ def connect_db():
     
     return engine
     
-def create_tables():
+def create_tables(engine):
     """
     Create all tables in the database if they do not exist.
     """
@@ -88,7 +88,6 @@ def create_tables():
         walking_step_length FLOAT
     );
     """)
-    engine = connect_db()
     Session = sessionmaker(bind=engine)
     session = Session()
     
