@@ -19,7 +19,9 @@ def connect_db():
     except NoSuchTableError:
         create_tables()
         db_url = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}"
-        engine = create_engine(db_url)        
+        engine = create_engine(db_url)
+    except Exception as e:
+        print(f"An error occurred while connecting to the database: {e}")        
     
     return engine
     
