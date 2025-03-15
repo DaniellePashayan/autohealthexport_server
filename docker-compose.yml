@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15 # Custom Dockerfile for PostgreSQL
-    container_name: postgres_test
+    container_name: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

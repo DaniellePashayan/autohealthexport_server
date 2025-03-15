@@ -1,13 +1,12 @@
-from fastapi import FastAPI, HTTPException, Depends
-from pydantic import BaseModel
-from models.health_metrics import HealthData, HealthMetric, HealthMetricData, HealthRootModel
-from database.database import connect_db
-from sqlalchemy import text, Table, MetaData
+from fastapi import FastAPI, HTTPException
+from models.health_metrics import HealthRootModel
+from database.database import connect_db, create_tables
+from sqlalchemy import Table, MetaData
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import sessionmaker
 import json
 
 app = FastAPI()
+
 
 @app.get("/")
 async def root():
@@ -56,6 +55,7 @@ async def import_healht_data(data: dict):
 
     return {"message": "Data imported successfully", "data": data}
 
-# if __name__ == "__main__":
-#     import uvicorn
-#     uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
+if __name__ == "__main__":
+    create_tables()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8001, reload=True)
