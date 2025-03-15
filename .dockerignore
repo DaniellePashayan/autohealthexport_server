@@ -22,3 +22,4 @@ docker-compose.override.yml
 .DS_Store
 Thumbs.db
 .venv
+*__pycache__*
