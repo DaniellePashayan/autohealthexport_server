@@ -56,6 +56,6 @@ async def import_healht_data(data: dict):
 
     return {"message": "Data imported successfully", "data": data}
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
