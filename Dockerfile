@@ -15,6 +15,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application code
 COPY . .
 
+# Run the database initialization script
+RUN python database/database.py
+
 EXPOSE 8005
 
 # Run the database initialization script and then start the FastAPI application
