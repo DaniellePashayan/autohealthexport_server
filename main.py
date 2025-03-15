@@ -11,7 +11,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the FastAPI application!"}
+    return {"message": "Welcome to the Auto Health Export sever application!"}
 
 @app.post("/import_health_data")
 async def import_healht_data(data: dict):

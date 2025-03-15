@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the FastAPI port
-EXPOSE 8100
+EXPOSE 8001
 
 # Run the database initialization script and then start the FastAPI application
-CMD ["sh", "-c", "python database/database.py && uvicorn main:app --host 0.0.0.0 --port 8100 --reload"]
+CMD ["sh", "-c", "python database/database.py && fastapi run main.py --port 80"]
