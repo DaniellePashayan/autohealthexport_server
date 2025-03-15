@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8100
 
 # Run the database initialization script and then start the FastAPI application
-CMD ["sh", "-c", "python database/database.py && uvicorn main:app --host localhost --port 8100 --reload"]
+CMD ["sh", "-c", "python database/database.py && uvicorn main:app --port 8100 --reload"]
