@@ -16,15 +16,10 @@ POSTGRES_USER=test_user
 POSTGRES_PASSWORD=test_password
 POSTGRES_DB=test_db
 POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
 
 # pgAdmin Configuration
 PGADMIN_DEFAULT_EMAIL=admin@admin.com
 PGADMIN_DEFAULT_PASSWORD=admin
-
-# Grafana Configuration
-GF_SECURITY_ADMIN_USER=admin
-GF_SECURITY_ADMIN_PASSWORD=admin
 EOL
 
     echo ".env file created successfully."
