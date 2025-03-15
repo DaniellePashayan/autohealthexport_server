@@ -1,12 +1,16 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def connect_db():
     """
     Connect to the PostgreSQL database using SQLAlchemy.
     """
     # Database connection URL
-    DATABASE_URL = "postgresql://test_user:test_password@localhost:5432/test_db"
+    DATABASE_URL = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}:{int(os.getenv("POSTGRES_PORT"))}/{os.getenv("POSTGRES_DB")}"
     
     # Create the SQLAlchemy engine
     engine = create_engine(DATABASE_URL)
