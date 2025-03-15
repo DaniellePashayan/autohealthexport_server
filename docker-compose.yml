@@ -12,6 +12,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - hae-network 
+    env_file:
+      - .env
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -25,6 +27,8 @@ services:
       - postgres
     networks:
       - hae-network 
+    env_file:
+      - .env
 
   api:
     build:
@@ -60,6 +64,8 @@ services:
       - grafana_data:/var/lib/grafana
     networks:
       - hae-network
+    env_file:
+      - .env
 
 volumes:
   postgres_data:
