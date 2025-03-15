@@ -54,23 +54,19 @@ services:
     restart: unless-stopped
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana-enterprise
     container_name: grafana
+    restart: unless-stopped
     ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
+      - '3000:3000'
     volumes:
-      - grafana_data:/var/lib/grafana
+      - grafana-storage:/var/lib/grafana
     networks:
       - hae-network
-    env_file:
-      - .env
-    restart: unless-stopped
 
 volumes:
   postgres_data:
-  grafana_data:
+  grafana-storage:
 
 networks:
   hae-network:
