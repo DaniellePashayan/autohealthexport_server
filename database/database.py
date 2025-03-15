@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import NoSuchTableError
 from dotenv import load_dotenv
 import os
 
@@ -10,10 +11,15 @@ def connect_db():
     Connect to the PostgreSQL database using SQLAlchemy.
     """
     # Database connection URL
-    db_url = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}"
     
-    # Create the SQLAlchemy engine
-    engine = create_engine(db_url)
+    try:
+        db_url = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}"
+        engine = create_engine(db_url)
+    
+    except NoSuchTableError:
+        create_tables()
+        db_url = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}"
+        engine = create_engine(db_url)        
     
     return engine
     
