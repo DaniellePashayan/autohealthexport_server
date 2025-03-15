@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import NoSuchTableError
+from sqlalchemy.exc import ProgrammingError
 from dotenv import load_dotenv
 import os
 
@@ -11,17 +11,15 @@ def connect_db():
     Connect to the PostgreSQL database using SQLAlchemy.
     """
     # Database connection URL
+    db_url = f'postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}'
+    engine = create_engine(db_url)
     
-    try:
-        db_url = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}"
-        engine = create_engine(db_url)
-    
-    except NoSuchTableError:
-        create_tables()
-        db_url = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}"
-        engine = create_engine(db_url)
-    except Exception as e:
-        print(f"An error occurred while connecting to the database: {e}")        
+    with engine.connect() as conn:
+        try:
+            result = conn.execute(text("SELECT 1 FROM health_metrics LIMIT 1;"))  # Quick check
+        except ProgrammingError:
+            print("Table 'health_metrics' not found. Creating tables...")
+            create_tables(engine)  # Call create_tables() if the table does not exist
     
     return engine
     
