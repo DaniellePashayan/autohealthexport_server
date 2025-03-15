@@ -10,7 +10,7 @@ def connect_db():
     Connect to the PostgreSQL database using SQLAlchemy.
     """
     # Database connection URL
-    DATABASE_URL = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}:{int(os.getenv("POSTGRES_PORT"))}/{os.getenv("POSTGRES_DB")}"
+    DATABASE_URL = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}"
     
     # Create the SQLAlchemy engine
     engine = create_engine(DATABASE_URL)
