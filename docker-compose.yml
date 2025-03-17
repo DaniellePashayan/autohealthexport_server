@@ -53,20 +53,9 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     restart: unless-stopped
 
-  grafana:
-    image: grafana/grafana-enterprise
-    container_name: grafana
-    restart: unless-stopped
-    ports:
-      - '3000:3000'
-    volumes:
-      - grafana-storage:/var/lib/grafana
-    networks:
-      - hae-network
 
 volumes:
   postgres_data:
-  grafana-storage:
 
 networks:
   hae-network:
