@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import Table, MetaData, and_, desc
 from sqlalchemy.dialects.postgresql import insert
 from typing import Optional
@@ -10,6 +11,18 @@ from models.health_metrics import HealthRootModel
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:8005",  # Dash default port
+    # Add other origins as needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
