@@ -173,3 +173,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 /recreate_venv.bat
+/frontend/health_metrics.csv
