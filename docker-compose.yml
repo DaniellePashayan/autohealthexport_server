@@ -44,7 +44,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - .:/app
+      - ./backend:/app
     networks:
       - hae-network
     environment:
