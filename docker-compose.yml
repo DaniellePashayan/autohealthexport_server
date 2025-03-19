@@ -34,7 +34,7 @@ services:
 
   api:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     container_name: fastapi_app
     env_file:
