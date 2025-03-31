@@ -28,6 +28,8 @@ services:
       - postgres
     networks:
       - hae-network 
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
     env_file:
       - .env
     restart: unless-stopped
@@ -56,6 +58,7 @@ services:
 
 volumes:
   postgres_data:
+  pgadmin_data:
 
 networks:
   hae-network:
