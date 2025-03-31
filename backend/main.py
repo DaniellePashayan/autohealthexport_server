@@ -48,7 +48,7 @@ async def get_health_data():
     data = [{key: row[i] for i, key in enumerate(keys)} for row in result]
     return {"data": data}
 
-
+# ------------ BODY METRICS ------------
 @app.get('/weight', tags=['Body'])
 async def get_weight_data():
     """Endpoint to retrieve weight data."""
@@ -57,9 +57,9 @@ async def get_weight_data():
     health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
     return get_metric_data(engine, health_metrics_table, [health_metrics_table.c.weight_body_mass])
 
-@app.get('/body_composition', tags=['Weight'])
+@app.get('/body_composition', tags=['Body'])
 async def get_body_composition_data():
-    """Endpoint to retrieve weight data."""
+    """Endpoint to retrieve body composition data."""
     engine = connect_db()
     metadata = MetaData()
     health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
@@ -72,7 +72,22 @@ async def get_body_composition_data():
     return get_metric_data(engine, health_metrics_table, columns)
 
 
+@app.get('/heart_rate', tags=['Body'])
+async def get_heart_rate_data():
+    """Endpoint to retrieve heart rate data."""
+    engine = connect_db()
+    metadata = MetaData()
+    health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
+    columns = [
+        health_metrics_table.c.heart_rate,
+        health_metrics_table.c.heart_rate_variability,
+        health_metrics_table.c.heart_rate_avg,
+        health_metrics_table.c.heart_rate_min,
+        health_metrics_table.c.heart_rate_max
+    ]
+    return get_metric_data(engine, health_metrics_table, columns)
 
+# ------------ ACTIVITY METRICS ------------
 @app.get('/steps', tags=['Activity'])
 async def get_steps_data():
     """Endpoint to retrieve steps data."""
@@ -81,6 +96,70 @@ async def get_steps_data():
     health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
     return get_metric_data(engine, health_metrics_table, [health_metrics_table.c.step_count])
 
+@app.get('/exercise', tags=['Activity'])
+async def get_exercise_data():
+    """Endpoint to retrieve nutrition data."""
+    engine = connect_db()
+    metadata = MetaData()
+    health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
+    columns = [
+        health_metrics_table.c.apple_stand_time,
+        health_metrics_table.c.apple_stand_hour,
+        health_metrics_table.c.apple_exercise_time,
+        health_metrics_table.c.flights_climbed,
+        health_metrics_table.c.step_count,
+        health_metrics_table.c.walking_running_distance
+    ]
+    return get_metric_data(engine, health_metrics_table, columns)
+
+# ------------ NUTRITION METRICS ------------
+@app.get('/nutrution', tags=['Nutrition'])
+async def get_nutrition_data():
+    """Endpoint to retrieve nutrition data."""
+    engine = connect_db()
+    metadata = MetaData()
+    health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
+    columns = [
+        health_metrics_table.c.dietary_energy,
+        health_metrics_table.c.carbohydrates,
+        health_metrics_table.c.cholesterol,
+        health_metrics_table.c.calcium,
+        health_metrics_table.c.dietary_sugar,
+        health_metrics_table.c.folate,
+        health_metrics_table.c.fiber,
+        health_metrics_table.c.iron,
+        health_metrics_table.c.magnesium,
+        health_metrics_table.c.monounsaturated_fat,
+        health_metrics_table.c.niacin,
+        health_metrics_table.c.potassium,
+        health_metrics_table.c.riboflavin,
+        health_metrics_table.c.protein,
+        health_metrics_table.c.saturated_fat,
+        health_metrics_table.c.sodium,
+        health_metrics_table.c.thiamin,
+        health_metrics_table.c.total_fat,
+        health_metrics_table.c.vitamin_b6,
+        health_metrics_table.c.vitamin_a,
+        health_metrics_table.c.vitamin_c,
+        health_metrics_table.c.vitamin_b12,
+        health_metrics_table.c.zinc
+    ]
+    return get_metric_data(engine, health_metrics_table, columns)
+
+@app.get('/CICO', tags=['Nutrition'])
+async def get_cico_data():
+    """Endpoint to retrieve calories in vs calories out data."""
+    engine = connect_db()
+    metadata = MetaData()
+    health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
+    columns = [
+        health_metrics_table.c.dietary_energy,
+        health_metrics_table.c.active_energy,
+        health_metrics_table.c.basal_energy_burned
+    ]
+    return get_metric_data(engine, health_metrics_table, columns)
+
+# ------------ IMPORT DATA ------------
 @app.post("/import_health_data", tags=['Import'])
 async def import_healht_data(data: dict):
     """
