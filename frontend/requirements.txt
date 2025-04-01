@@ -1,5 +1,5 @@
-streamlit
 pandas
-requests
+plotly
 python-dotenv
-streamlit-shadcn-ui
+requests
+streamlit

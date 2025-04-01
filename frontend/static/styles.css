@@ -1,0 +1,44 @@
+:root {
+  --dark-gray: #1a1e24;
+  --medium-gray: #353d4a;
+  --light-gray: #d1d5db;
+  --blue: #4F8FC3;
+  --green: #80cbc4;
+  --red: #fca399;
+}
+
+
+div[data-testid="stMetric"] {
+  background-color: var(--medium-gray) !important; /* Light gray background for blocks */
+  border-radius: 10px !important; /* Rounded corners for blocks */
+  padding: 10px !important; /* Padding inside the blocks */
+}
+
+label[data-testid="stMetricLabel"] p {
+  font-size: 1rem !important;
+  font-weight: 800 !important; /* Medium weight for labels */
+  color: var(--blue) !important; /* White color for labels */
+}
+
+div[data-testid="stNumberInput"] p {
+  font-size: 1rem !important;
+  font-weight: 800 !important; /* Medium weight for labels */
+  color: var(--blue) !important; /* White color for labels */
+}
+
+div[data-testid="stNumberInput"] {
+  background-color: var(--medium-gray) !important; /* Light gray background for blocks */
+  border-radius: 10px !important; /* Rounded corners for blocks */
+  padding: 10px !important; /* Padding inside the blocks */
+  padding-bottom: 14px !important; /* Extra padding at the bottom for better spacing */
+}
+
+input[data-testid="stNumberInputContainer"] {
+  background-color: var(--medium-gray) !important; /* Padding inside the input field */
+}
+
+input[data-testid="stNumberInputField"] {
+  font-size: 2.25rem;
+  margin-bottom: 5px !important; /* Padding inside the input field */
+}
+
