@@ -26,7 +26,7 @@ def get_metric_data(engine, table, metric_columns: List):
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the Auto Health Export sever application!"}
+    return {"message": "Welcome to the Auto Health Export server application!"}
 
 @app.get("/all_health_data", tags=['General'])
 async def get_health_data():
@@ -98,7 +98,7 @@ async def get_steps_data():
 
 @app.get('/exercise', tags=['Activity'])
 async def get_exercise_data():
-    """Endpoint to retrieve nutrition data."""
+    """Endpoint to retrieve exercise and movement data."""
     engine = connect_db()
     metadata = MetaData()
     health_metrics_table = Table("health_metrics", metadata, autoload_with=engine)
@@ -113,7 +113,7 @@ async def get_exercise_data():
     return get_metric_data(engine, health_metrics_table, columns)
 
 # ------------ NUTRITION METRICS ------------
-@app.get('/nutrution', tags=['Nutrition'])
+@app.get('/nutrition', tags=['Nutrition'])
 async def get_nutrition_data():
     """Endpoint to retrieve nutrition data."""
     engine = connect_db()
