@@ -10,13 +10,17 @@ def connect_db():
     """
     Connect to the PostgreSQL database using SQLAlchemy.
     """
+    
     # Database connection URL
-    db_url = f'postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}/{os.getenv("POSTGRES_DB")}'
+    if os.getenv("ENVIRONMENT") == "production":
+        db_url = f'postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@{os.getenv("POSTGRES_HOST")}:5432/{os.getenv("POSTGRES_DB")}'
+    elif os.getenv("ENVIRONMENT") == "development":
+        db_url = f'postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@localhost:5432/{os.getenv("POSTGRES_DB")}'
     engine = create_engine(db_url)
     
     with engine.connect() as conn:
         try:
-            result = conn.execute(text("SELECT 1 FROM health_metrics LIMIT 1;"))  # Quick check
+            conn.execute(text("SELECT 1 FROM health_metrics LIMIT 1;"))  # Quick check
         except ProgrammingError:
             print("Table 'health_metrics' not found. Creating tables...")
             create_tables(engine)  # Call create_tables() if the table does not exist
