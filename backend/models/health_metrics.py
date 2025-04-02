@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 from datetime import datetime
 
 class HealthMetricData(BaseModel):
@@ -10,7 +10,7 @@ class HealthMetricData(BaseModel):
     Avg: Optional[float] = None
     Max: Optional[float] = None
     
-    @validator("date", pre=True)
+    @field_validator("date", mode="before")
     def parse_date(cls, value):
         """
         Custom validator to parse date strings into datetime objects.
