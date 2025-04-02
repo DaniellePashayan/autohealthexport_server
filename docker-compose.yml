@@ -56,9 +56,21 @@ services:
     restart: unless-stopped
 
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - hae-network
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   pgadmin_data:
+  grafana_data:
 
 networks:
   hae-network:
