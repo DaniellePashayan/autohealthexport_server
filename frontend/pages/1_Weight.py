@@ -6,6 +6,14 @@ import streamlit as st
 
 from Home import get_metric_calculation, weight_data, THEME_COLORS
 
+# ------ SET PAGE CONFIGURATION ------
+st.set_page_config(
+    page_title="Weight",
+    page_icon="./static/icon.png",
+    layout="wide",  
+    initial_sidebar_state="expanded"
+)
+
 # ------ GRAPHS ------
 def weight_loss_trend_graph(df:pd.DataFrame, column_name:str="weight_body_mass"):
     """
@@ -43,14 +51,6 @@ def weight_loss_trend_graph(df:pd.DataFrame, column_name:str="weight_body_mass")
 
 # ------ PAGE ------
 def weight_loss_page():
-    
-    # ------ SET PAGE CONFIGURATION ------
-    st.set_page_config(
-        page_title="Weight",
-        page_icon="./static/icon.png",
-        layout="wide",  
-        initial_sidebar_state="expanded"
-    )
     
     # ------ APPLY THEME AND CONFIGS ------
     with open('./static/styles.css') as f:

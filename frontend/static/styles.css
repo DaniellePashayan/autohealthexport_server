@@ -1,41 +1,43 @@
 :root {
-  --dark-gray: #1a1e24;
-  --medium-gray: #353d4a;
-  --light-gray: #d1d5db;
-  --blue: #4F8FC3;
-  --green: #80cbc4;
-  --red: #fca399;
+  --background: #fff;
+  --secondary-background: #f9f4f1;
+  --green: #c3e66e; /* Green accent color */
+  --yellow: #ffcb65; /* Yellow accent color */
+  --orange: #ffa157; /* Orange accent color */
+  --red: #ff6f61; /* Red accent color */
+  --lightest-gray: #f6f6f8;
+  --light-gray: #e1e1e3; /* Light gray color */
+  --medium-gray: #3e4349; /* Medium gray color */
+  --text-dark: #282932; /* Text color */
+  --text-light: #86888e;
 }
 
 
 div[data-testid="stMetric"] {
-  background-color: var(--medium-gray) !important; /* Light gray background for blocks */
-  border-radius: 10px !important; /* Rounded corners for blocks */
-  padding: 10px !important; /* Padding inside the blocks */
+  background-color: var(--secondary-background) !important;
+  border-radius: 10px !important; 
+  padding: 10px !important;
 }
 
 label[data-testid="stMetricLabel"] p {
   font-size: 1rem !important;
   font-weight: 800 !important; /* Medium weight for labels */
-  color: var(--blue) !important; /* White color for labels */
+  color: var(--text-dard) !important; /* White color for labels */
 }
 
 div[data-testid="stNumberInput"] p {
   font-size: 1rem !important;
   font-weight: 800 !important; /* Medium weight for labels */
-  color: var(--blue) !important; /* White color for labels */
+  color: var(--text-dark) !important; /* White color for labels */
 }
 
 div[data-testid="stNumberInput"] {
-  background-color: var(--medium-gray) !important; /* Light gray background for blocks */
+  background-color: var(--secondary-background) !important; /* Light gray background for blocks */
   border-radius: 10px !important; /* Rounded corners for blocks */
   padding: 10px !important; /* Padding inside the blocks */
   padding-bottom: 14px !important; /* Extra padding at the bottom for better spacing */
 }
 
-input[data-testid="stNumberInputContainer"] {
-  background-color: var(--medium-gray) !important; /* Padding inside the input field */
-}
 
 input[data-testid="stNumberInputField"] {
   font-size: 2.25rem;
